@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SMART Ventilation System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: #1e2a38;
+      color: white;
+      padding: 30px;
+      width: 30%;
+      box-sizing: border-box;
+    }
+
+    .sidebar h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* Main Content */
+    .main {
+      width: 70%;
+      padding: 30px;
+      background-color: #f4f4f4;
+      box-sizing: border-box;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      background-color: #ddd;
+      border-radius: 5px;
+    }
+
+    .tab.active {
+      background-color: #4285f4;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    pre {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      overflow-x: auto;
+      font-size: 14px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>SMART Ventilation System</h1>
+    <p>
+      This project uses an ESP32 to monitor air quality and motion using sensors like MQ2, MQ135, and a dust sensor.
+      The system activates a fan at different speeds based on readings and motion detection. Data is sent to Firebase
+      and optionally integrated with ThingSpeak for cloud analytics.
+    </p>
+    <p><strong>Key Features:</strong></p>
+    <ul>
+      <li>Real-time gas & dust monitoring</li>
+      <li>Motion-triggered fan control</li>
+      <li>Firebase cloud data sync</li>
+      <li>Alert system for critical air levels</li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="tabs">
+      <div class="tab active" data-tab="overview">Overview</div>
+      <div class="tab" data-tab="code">Code</div>
+    </div>
+
+    <div id="overview" class="tab-content active">
+      <h2>System Overview</h2>
+      <p>
+        The system collects data from gas and dust sensors and uses it to intelligently control a fan.
+        If poor air quality is detected, the fan turns on at high speed. If only motion is detected,
+        it runs on low speed. Alerts are pushed to Firebase, and all sensor data is regularly synced.
+      </p>
+    </div>
+
+    <div id="code" class="tab-content">
+      <h2>Arduino/ESP32 Code</h2>
+      <pre><code>
+#include &lt;WiFi.h&gt;
+#include &lt;FirebaseESP32.h&gt;
+
+// Firebase credentials
+#define WIFI_SSID "" 
+#define WIFI_PASSWORD "" 
+#define API_KEY "" 
+#define DATABASE_URL ""
+#define USER_EMAIL "" 
+#define USER_PASSWORD ""
+
+// ... (trimmed for brevity — full code continues below)
+      </code></pre>
+      <p>⚠️ You can paste your full code here or link to it via GitHub for easier reading.</p>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
 
