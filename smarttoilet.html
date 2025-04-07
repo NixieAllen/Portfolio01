@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SMART Ventilation System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: #1e2a38;
+      color: white;
+      padding: 30px;
+      width: 30%;
+      box-sizing: border-box;
+    }
+
+    .sidebar h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* Main Content */
+    .main {
+      width: 70%;
+      padding: 30px;
+      background-color: #f4f4f4;
+      box-sizing: border-box;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      background-color: #ddd;
+      border-radius: 5px;
+    }
+
+    .tab.active {
+      background-color: #4285f4;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    pre {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      overflow-x: auto;
+      font-size: 14px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>SMART Toilet System</h1>
+    <p><strong>Description:</strong> This Arduino-based project uses an ESP32 microcontroller to collect data from various environmental sensors and upload it to Firebase Realtime Database. It can be used in smart monitoring systems for homes, schools, or coastal areas.</p>
+    </p>
+    <p><strong>Key Features:</strong></p>
+    <h2>Features</h2>
+    <ul>
+      <li>Temperature and Humidity Monitoring (DHT22)</li>
+      <li>Motion Detection (PIR Sensor)</li>
+      <li>Gas/Smoke Detection (MQ135)</li>
+      <li>Distance Measurement (Ultrasonic Sensor)</li>
+      <li>Color Detection (TCS3200)</li>
+      <li>Servo Control Based on Sensor Inputs</li>
+      <li>Data Upload to Firebase</li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="tabs">
+      <div class="tab active" data-tab="overview">Overview</div>
+      <div class="tab" data-tab="code">Code</div>
+    </div>
+
+    <div id="overview" class="tab-content active">
+      <h2>System Overview</h2>
+      <p>
+        The system  designed for an ESP32-based environmental monitoring system. It reads real-time data from sensors (such as the DHT22 for temperature and humidity) and uploads the values to a Firebase Realtime Database over Wi-Fi.
+        This setup allows for remote monitoring of environmental conditions, making it suitable for smart homes, weather stations, or coastal observation systems. It can also serve as a foundation for more advanced IoT (Internet of Things) applications that require cloud-based data storage and access.
+      </p>
+    </div>
+
+    <div id="code" class="tab-content">
+      <h2>Arduino/ESP32 Code</h2>
+      <pre><code>
+// Distance Monitoring
+float distance = getDistance();
+    if (distance <= 20) {
+        digitalWrite(ULTRASONIC_RED_PIN, LOW);
+        digitalWrite(ULTRASONIC_GREEN_PIN, HIGH);
+        digitalWrite(ULTRASONIC_BLUE_PIN, LOW);
+    } else if (distance <= 50) {
+        digitalWrite(ULTRASONIC_RED_PIN, LOW);
+        digitalWrite(ULTRASONIC_GREEN_PIN, LOW);
+        digitalWrite(ULTRASONIC_BLUE_PIN, HIGH);
+    } else if (distance > 1000) {
+        digitalWrite(ULTRASONIC_RED_PIN, LOW);
+        digitalWrite(ULTRASONIC_GREEN_PIN, HIGH);
+        digitalWrite(ULTRASONIC_BLUE_PIN, LOW);
+    } else {
+        digitalWrite(ULTRASONIC_RED_PIN, HIGH);
+        digitalWrite(ULTRASONIC_GREEN_PIN, LOW);
+        digitalWrite(ULTRASONIC_BLUE_PIN, LOW);
+    }
+      </code></pre>
+      <p>⚠️ Full Code available upon request.</p>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
